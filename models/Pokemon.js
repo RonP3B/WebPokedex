@@ -15,7 +15,7 @@ const Pokemon = sequelizeObj.define("pokemons", {
   },
 
   photo_url: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT("long"),
     allowNull: false,
   },
 });
