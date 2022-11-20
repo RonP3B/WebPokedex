@@ -1,0 +1,84 @@
+.main {
+  @include extraExtraLarge {
+    &__main-menu {
+      button {
+        max-width: 11.45rem;
+        font-size: 1.3rem;
+      }
+    }
+
+    &__filter {
+      .radio-container {
+        svg {
+          font-size: 3.1rem;
+        }
+
+        a {
+          font-size: 1.15rem;
+        }
+      }
+    }
+
+    &__nav {
+      &__list {
+        font-size: 1.4rem;
+      }
+    }
+
+    &__content {
+      h1 {
+        font-size: 3rem;
+      }
+
+      .content-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .warning {
+        svg {
+          font-size: 10rem;
+        }
+
+        a {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    &__card-management {
+      &__body {
+        .card-text {
+          width: 78%;
+          font-size: 1.4rem;
+        }
+
+        a {
+          font-size: 1.35rem;
+        }
+      }
+    }
+
+    &__card {
+      &__header {
+        font-size: 2.3rem;
+      }
+
+      &__body {
+        &__form {
+          label,
+          p,
+          &__buttons button,
+          &__buttons a {
+            font-size: 1.25rem;
+          }
+
+          .input-img {
+            img {
+              height: 5.6rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

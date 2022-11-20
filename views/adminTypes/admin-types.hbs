@@ -1,0 +1,81 @@
+<section class="main__section">
+  <div class="main__main-menu">
+    <a class="btn button default-button" href="/">volver al home</a>
+    <a class="btn button default-button" href="/admin-types/add">
+      crear un tipo de pokemon
+    </a>
+  </div>
+  <article class="main__content">
+    {{#if noTypes}}
+      <div class="warning">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        ><path
+            fill="currentColor"
+            d="M4 20v-6a8 8 0 1 1 16 0v6h1v2H3v-2h1zm2-6h2a4 4 0 0 1 4-4V8a6 6 0 0 0-6 6zm5-12h2v3h-2V2zm8.778 2.808l1.414 1.414l-2.12 2.121l-1.415-1.414l2.121-2.121zM2.808 6.222l1.414-1.414l2.121 2.12L4.93 8.344L2.808 6.222z"
+          ></path></svg>
+        <h1 class="text-center mb-0">no hay ningún tipo de pokemon registrado</h1>
+        <a href="/admin-types/add" class="btn default-button">crear tipo de
+          pokemon</a>
+      </div>
+    {{else}}
+      <h1>listado de tipo de pokemones</h1>
+      <div class="content-container">
+        {{#each types}}
+          <div class="main__card card main__card-management">
+            <div class="main__card__header card-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24"
+              ><path
+                  fill="currentColor"
+                  d="M6.5 11L12 2l5.5 9Zm11 11q-1.875 0-3.188-1.312Q13 19.375 13 17.5q0-1.875 1.312-3.188Q15.625 13 17.5 13q1.875 0 3.188 1.312Q22 15.625 22 17.5q0 1.875-1.312 3.188Q19.375 22 17.5 22ZM3 21.5v-8h8v8Z"
+                ></path></svg>
+            </div>
+            <div class="main__card__body card-body main__card-management__body">
+              <p class="card-text"><strong>Tipo de pokemon:</strong>
+                {{this.name}}</p>
+              <div>
+                <a
+                  class="btn btn-warning management-button"
+                  href="/admin-types/edit/{{this.id_type}}"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  ><path
+                      fill="currentColor"
+                      d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"
+                    ></path></svg>
+                </a>
+                <a
+                  class="btn btn-danger management-button"
+                  href="/admin-types/delete/{{this.id_type}}"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  ><path
+                      fill="currentColor"
+                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                    ></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </article>
+</section>

@@ -1,0 +1,57 @@
+.footer {
+  background-color: $red;
+  height: 5rem;
+  margin-top: auto;
+  overflow: hidden;
+
+  &__circle {
+    &::after {
+      border-radius: 0 0 100% 100%;
+      top: -60px;
+    }
+  }
+
+  &__small-circle-l,
+  &__small-circle-r {
+    &::after {
+      top: 48px;
+    }
+  }
+
+  &__medium-circle-l,
+  &__medium-circle-r {
+    &::after {
+      top: 24px;
+    }
+  }
+
+  &__small-circle-l,
+  &__medium-circle-l {
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__small-circle-r,
+  &__medium-circle-r {
+    &::after {
+      transform: rotate(225deg);
+    }
+  }
+
+  &__small-circle-l::after {
+    left: -32px;
+  }
+
+  &__small-circle-r::after {
+    right: -32px;
+  }
+
+  &__medium-circle-l::after {
+    left: -56px;
+  }
+
+  &__medium-circle-r::after {
+    right: -56px;
+  }
+}

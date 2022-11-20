@@ -1,0 +1,243 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  &__bars {
+    display: block;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    border: 2px solid $darkGreen;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &__main-menu,
+  &__nav,
+  &__search,
+  &__filter {
+    box-shadow: $shadow;
+    border: 2px solid #000;
+    background-color: $darkBlue;
+  }
+
+  &__main-menu {
+    display: flex;
+    justify-content: center;
+    padding: 0.3rem;
+    margin: 1rem 0;
+
+    .button {
+      margin: 0 0.2rem;
+      max-width: 12rem;
+      padding: 0.575rem 0.95rem;
+    }
+  }
+
+  &__nav {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+
+    &__list {
+      font-size: 1.2rem;
+
+      a {
+        letter-spacing: 0.1rem;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        padding: 0.3rem;
+        color: $textColor;
+        background-color: $btnBackground;
+        transition-property: background-color, color;
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+
+        &:hover {
+          color: $darkBlue;
+          background-color: $darkGreen;
+        }
+      }
+    }
+  }
+
+  &__search {
+    padding: 0.3rem;
+    display: flex;
+    align-items: center;
+
+    button {
+      outline: none;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      width: max-content;
+      height: max-content;
+      font-size: 2rem;
+      color: $textColor;
+    }
+
+    .form-control {
+      color: $btnBackground;
+      border: 2px solid $btnBackground;
+
+      &:focus {
+        color: $btnBackground;
+      }
+    }
+  }
+
+  &__filter {
+    padding: 0.3rem;
+    letter-spacing: 0.1rem;
+    text-transform: capitalize;
+
+    .radio-container {
+      display: grid;
+      align-items: center;
+      background-color: $btnBackground;
+      padding: 0.2rem;
+      margin-bottom: 0.45rem;
+      border-radius: 5px;
+      border: 2px solid $darkGreen;
+      max-height: 7.3rem;
+      overflow-y: auto;
+      min-height: 4rem;
+      @include scrollbar($darkGreen, rgba(98, 177, 181, 0.73), 6px);
+
+      p,
+      svg {
+        color: $textColor;
+      }
+
+      svg {
+        margin: 0 auto;
+        font-size: 2.5rem;
+      }
+
+      a {
+        background-color: $darkBlue;
+        width: 50%;
+        margin: 0 auto;
+        display: block;
+
+        &:hover {
+          color: $darkBlue;
+          background-color: $textColor;
+        }
+      }
+    }
+
+    h4 {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    label {
+      font-size: 1.05rem;
+    }
+
+    h4,
+    label {
+      color: $textColor;
+    }
+
+    label,
+    input {
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  &__card-management {
+    width: 95%;
+    max-height: 7.161rem;
+
+    &__body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .card-text {
+        margin: 0;
+        width: 73%;
+        line-height: 0.9;
+        overflow: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        @include scrollbar($red, $darkRed, 4px);
+      }
+
+      a {
+        font-size: 1.05rem;
+      }
+    }
+  }
+
+  &__card {
+    box-shadow: $shadow;
+    border: 2px solid #000;
+    margin: 1rem auto;
+
+    &__header {
+      background-color: $red;
+      color: $textColor;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-transform: capitalize;
+    }
+
+    &__body {
+      text-transform: capitalize;
+
+      .card-text,
+      label {
+        color: $red;
+        font-size: 1.1rem;
+      }
+
+      &__form {
+        p {
+          color: $red;
+        }
+
+        &__buttons {
+          display: flex;
+          justify-content: center;
+
+          a,
+          button {
+            width: 45%;
+          }
+        }
+
+        .input-img {
+          picture {
+            display: grid;
+            place-items: center;
+          }
+
+          img {
+            height: 4rem;
+            border: 2px solid $darkRed;
+          }
+        }
+      }
+    }
+  }
+}
+
+@import "./main/content.scss";
+@import "./main/small.scss";
+@import "./main/medium.scss";
+@import "./main/large.scss";
+@import "./main/xl.scss";
+@import "./main/xxl.scss";

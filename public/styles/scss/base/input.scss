@@ -1,0 +1,30 @@
+.form-control {
+  padding: 0.1rem 0.3rem;
+}
+
+.form-control,
+.form-select {
+  &:focus {
+    box-shadow: 0 0 0 0.15rem rgba(73, 69, 69, 0.25);
+  }
+
+  @include small {
+    font-size: 1.05rem;
+  }
+
+  @include medium {
+    font-size: 1.1rem;
+  }
+
+  @include large {
+    font-size: 1.15rem;
+  }
+
+  @include extraLarge {
+    font-size: 1.2rem;
+  }
+
+  @include extraExtraLarge {
+    font-size: 1.25rem;
+  }
+}

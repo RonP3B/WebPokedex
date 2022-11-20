@@ -1,0 +1,121 @@
+.main {
+  @include large {
+    &__main-menu {
+      button {
+        max-width: 10.8rem;
+        font-size: 1.2rem;
+      }
+    }
+
+    &__nav {
+      &__list {
+        font-size: 1.3rem;
+      }
+    }
+
+    &__filter {
+      .radio-container {
+        svg {
+          font-size: 3.05rem;
+        }
+
+        a {
+          font-size: 1.1rem;
+        }
+      }
+
+      h4 {
+        font-size: 1.3rem;
+      }
+
+      label {
+        font-size: 1.15rem;
+      }
+
+      button {
+        width: 60%;
+        font-size: 1.1rem;
+      }
+    }
+
+    &__content {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .content-container {
+        .pokeball {
+          width: 25rem;
+          height: 25rem;
+
+          &__info {
+            width: 13rem;
+            height: 6.5rem;
+
+            label {
+              font-size: 1.2rem;
+            }
+          }
+
+          img {
+            height: 7.2rem;
+            top: 34%;
+            right: 34%;
+          }
+
+          &__delete,
+          &__edit {
+            top: 55%;
+            font-size: 1.7rem;
+          }
+        }
+      }
+
+      .warning {
+        svg {
+          font-size: 8rem;
+        }
+
+        a {
+          font-size: 1.15rem;
+        }
+      }
+    }
+
+    &__card-management {
+      &__body {
+        .card-text {
+          width: 80%;
+          font-size: 1.25rem;
+        }
+
+        a {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    &__card {
+      &__header {
+        font-size: 2.15rem;
+      }
+
+      &__body {
+        &__form {
+          label,
+          p,
+          &__buttons button,
+          &__buttons a {
+            font-size: 1.15rem;
+          }
+
+          .input-img {
+            img {
+              height: 5.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

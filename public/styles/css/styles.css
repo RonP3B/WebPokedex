@@ -1,0 +1,827 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "VT323", monospace;
+  background-color: #a8dadc;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pokedex-border {
+  display: grid;
+  grid-template-columns: 1fr 90.2px 1fr;
+  position: relative;
+}
+.pokedex-border span {
+  height: 5px;
+  background-color: #000;
+}
+.pokedex-border .blue {
+  background-color: #a8dadc;
+}
+
+.circle,
+.small-circle,
+.medium-circle {
+  position: relative;
+}
+.circle::after,
+.small-circle::after,
+.medium-circle::after {
+  content: "";
+  position: absolute;
+}
+
+.small-circle::after,
+.medium-circle::after {
+  border-radius: 100%;
+  border: 3.5px solid;
+  border-color: transparent #6a040f transparent transparent;
+}
+
+.circle::after {
+  height: 7rem;
+  width: 7rem;
+  border: 10px solid #000;
+  background-color: #a8dadc;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.small-circle::after {
+  height: 4rem;
+  width: 4rem;
+}
+
+.medium-circle::after {
+  height: 7rem;
+  width: 7rem;
+}
+
+.form-control {
+  padding: 0.1rem 0.3rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.15rem rgba(73, 69, 69, 0.25);
+}
+@media screen and (min-width: 576px) {
+  .form-control,
+.form-select {
+    font-size: 1.05rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .form-control,
+.form-select {
+    font-size: 1.1rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .form-control,
+.form-select {
+    font-size: 1.15rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .form-control,
+.form-select {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .form-control,
+.form-select {
+    font-size: 1.25rem;
+  }
+}
+
+.default-button {
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  color: #eff7f6;
+  background-color: #44a1a0;
+  border: 1px solid #508991;
+  line-height: 0.8;
+  transition-property: background-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+  display: inline-flex;
+  align-items: center;
+}
+.default-button:hover {
+  background-color: #eff7f6;
+  color: #44a1a0;
+}
+
+.management-button {
+  border: 2px solid #6a040f;
+  color: #eff7f6;
+  padding: 0.175rem;
+}
+.management-button:hover {
+  color: #eff7f6;
+  border-color: #6a040f;
+}
+
+.header {
+  background-color: #bd1f36;
+  height: 5rem;
+  overflow: hidden;
+}
+.header__circle::after {
+  border-radius: 100% 100% 0 0;
+  top: 28px;
+}
+.header__small-circle-l::after, .header__small-circle-r::after {
+  top: -32px;
+}
+.header__medium-circle-l::after, .header__medium-circle-r::after {
+  top: -56px;
+}
+.header__small-circle-l::after, .header__medium-circle-l::after {
+  transform: rotate(45deg);
+}
+.header__small-circle-r::after, .header__medium-circle-r::after {
+  transform: rotate(135deg);
+}
+.header__small-circle-l::after {
+  left: -32px;
+}
+.header__small-circle-r::after {
+  right: -32px;
+}
+.header__medium-circle-l::after {
+  left: -56px;
+}
+.header__medium-circle-r::after {
+  right: -56px;
+}
+.header__pokedex-border {
+  bottom: -75px;
+}
+
+.footer {
+  background-color: #bd1f36;
+  height: 5rem;
+  margin-top: auto;
+  overflow: hidden;
+}
+.footer__circle::after {
+  border-radius: 0 0 100% 100%;
+  top: -60px;
+}
+.footer__small-circle-l::after, .footer__small-circle-r::after {
+  top: 48px;
+}
+.footer__medium-circle-l::after, .footer__medium-circle-r::after {
+  top: 24px;
+}
+.footer__small-circle-l::after, .footer__medium-circle-l::after {
+  transform: rotate(-45deg);
+}
+.footer__small-circle-r::after, .footer__medium-circle-r::after {
+  transform: rotate(225deg);
+}
+.footer__small-circle-l::after {
+  left: -32px;
+}
+.footer__small-circle-r::after {
+  right: -32px;
+}
+.footer__medium-circle-l::after {
+  left: -56px;
+}
+.footer__medium-circle-r::after {
+  right: -56px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.main__bars {
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #508991;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.main__main-menu, .main__nav, .main__search, .main__filter {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border: 2px solid #000;
+  background-color: #219ebc;
+}
+.main__main-menu {
+  display: flex;
+  justify-content: center;
+  padding: 0.3rem;
+  margin: 1rem 0;
+}
+.main__main-menu .button {
+  margin: 0 0.2rem;
+  max-width: 12rem;
+  padding: 0.575rem 0.95rem;
+}
+.main__nav {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+.main__nav__list {
+  font-size: 1.2rem;
+}
+.main__nav__list a {
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  color: #eff7f6;
+  background-color: #44a1a0;
+  transition-property: background-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+.main__nav__list a:hover {
+  color: #219ebc;
+  background-color: #508991;
+}
+.main__search {
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+}
+.main__search button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  width: max-content;
+  height: max-content;
+  font-size: 2rem;
+  color: #eff7f6;
+}
+.main__search .form-control {
+  color: #44a1a0;
+  border: 2px solid #44a1a0;
+}
+.main__search .form-control:focus {
+  color: #44a1a0;
+}
+.main__filter {
+  padding: 0.3rem;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+}
+.main__filter .radio-container {
+  display: grid;
+  align-items: center;
+  background-color: #44a1a0;
+  padding: 0.2rem;
+  margin-bottom: 0.45rem;
+  border-radius: 5px;
+  border: 2px solid #508991;
+  max-height: 7.3rem;
+  overflow-y: auto;
+  min-height: 4rem;
+  scrollbar-width: thin;
+  scrollbar-color: #508991 rgba(98, 177, 181, 0.73);
+}
+.main__filter .radio-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: rgba(98, 177, 181, 0.73);
+}
+.main__filter .radio-container::-webkit-scrollbar-thumb {
+  background-color: #508991;
+  border-radius: 0 8px 8px 0;
+}
+.main__filter .radio-container p,
+.main__filter .radio-container svg {
+  color: #eff7f6;
+}
+.main__filter .radio-container svg {
+  margin: 0 auto;
+  font-size: 2.5rem;
+}
+.main__filter .radio-container a {
+  background-color: #219ebc;
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}
+.main__filter .radio-container a:hover {
+  color: #219ebc;
+  background-color: #eff7f6;
+}
+.main__filter h4 {
+  text-align: center;
+  font-size: 1.2rem;
+}
+.main__filter label {
+  font-size: 1.05rem;
+}
+.main__filter h4,
+.main__filter label {
+  color: #eff7f6;
+}
+.main__filter label,
+.main__filter input {
+  cursor: pointer;
+}
+.main__filter button {
+  width: 100%;
+  display: block;
+}
+.main__card-management {
+  width: 95%;
+  max-height: 7.161rem;
+}
+.main__card-management__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main__card-management__body .card-text {
+  margin: 0;
+  width: 73%;
+  line-height: 0.9;
+  overflow: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: #bd1f36 #6a040f;
+}
+.main__card-management__body .card-text::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: #6a040f;
+}
+.main__card-management__body .card-text::-webkit-scrollbar-thumb {
+  background-color: #bd1f36;
+  border-radius: 0 8px 8px 0;
+}
+.main__card-management__body a {
+  font-size: 1.05rem;
+}
+.main__card {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border: 2px solid #000;
+  margin: 1rem auto;
+}
+.main__card__header {
+  background-color: #bd1f36;
+  color: #eff7f6;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+}
+.main__card__body {
+  text-transform: capitalize;
+}
+.main__card__body .card-text,
+.main__card__body label {
+  color: #bd1f36;
+  font-size: 1.1rem;
+}
+.main__card__body__form p {
+  color: #bd1f36;
+}
+.main__card__body__form__buttons {
+  display: flex;
+  justify-content: center;
+}
+.main__card__body__form__buttons a,
+.main__card__body__form__buttons button {
+  width: 45%;
+}
+.main__card__body__form .input-img picture {
+  display: grid;
+  place-items: center;
+}
+.main__card__body__form .input-img img {
+  height: 4rem;
+  border: 2px solid #6a040f;
+}
+
+.main__content h1 {
+  text-transform: capitalize;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  color: #6a040f;
+  line-height: 0.8;
+}
+.main__content .content-container .pokeball {
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.43);
+  background-color: #eff7f6;
+  border-radius: 50%;
+  width: 18rem;
+  height: 18rem;
+  overflow: hidden;
+  margin: 1rem auto;
+  position: relative;
+  transition: transform 0.25s linear;
+}
+.main__content .content-container .pokeball__delete, .main__content .content-container .pokeball__edit,
+.main__content .content-container .pokeball img {
+  position: absolute;
+}
+.main__content .content-container .pokeball__delete, .main__content .content-container .pokeball__edit {
+  top: 55%;
+  font-size: 1.5rem;
+}
+.main__content .content-container .pokeball__delete {
+  right: 8%;
+}
+.main__content .content-container .pokeball__edit {
+  left: 8%;
+}
+.main__content .content-container .pokeball:hover {
+  transform: scale(1.02);
+}
+.main__content .content-container .pokeball__red {
+  background-color: #bd1f36;
+  height: 50%;
+  border-bottom: 4px solid #000;
+}
+.main__content .content-container .pokeball__info {
+  display: grid;
+  place-items: center;
+  width: 9.5rem;
+  height: 4.5rem;
+  color: #bd1f36;
+  text-align: center;
+  text-transform: capitalize;
+  margin: 3.07rem auto 0 auto;
+  line-height: 0.8;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #bd1f36 #eff7f6;
+  background-color: #e7ecef;
+  border: 2px solid #6a040f;
+  border-radius: 5px;
+}
+.main__content .content-container .pokeball__info::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  background: #eff7f6;
+}
+.main__content .content-container .pokeball__info::-webkit-scrollbar-thumb {
+  background-color: #bd1f36;
+  border-radius: 0 8px 8px 0;
+}
+.main__content .content-container .pokeball__info label {
+  width: 100%;
+  margin-top: 0.15rem;
+}
+.main__content .content-container .pokeball img {
+  border-radius: 50%;
+  border: 3px solid #000;
+  height: 6rem;
+  top: 33%;
+  right: 33%;
+}
+.main__content .warning {
+  text-align: center;
+}
+.main__content .warning svg {
+  color: #6a040f;
+  margin-top: 1rem;
+  font-size: 5rem;
+}
+.main__content .warning h1 {
+  margin-top: 1rem;
+}
+.main__content .warning a {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  max-width: 10rem;
+}
+
+@media screen and (min-width: 576px) {
+  .main__main-menu {
+    margin: 1rem auto;
+  }
+  .main__main-menu .button {
+    font-size: 1.1rem;
+  }
+  .main__content h1 {
+    font-size: 2.015rem;
+  }
+  .main__content .content-container .pokeball {
+    width: 20rem;
+    height: 20rem;
+  }
+  .main__content .content-container .pokeball__info {
+    width: 10rem;
+    height: 5rem;
+    margin: 3.4rem auto 0 auto;
+  }
+  .main__content .content-container .pokeball__info label {
+    font-size: 1.05rem;
+  }
+  .main__content .content-container .pokeball img {
+    height: 6.5rem;
+  }
+  .main__content .warning svg {
+    font-size: 6rem;
+  }
+  .main__content .warning a {
+    font-size: 1.05rem;
+  }
+  .main__card-management__body .card-text {
+    width: 80%;
+    font-size: 1.15rem;
+  }
+  .main__card-management__body a {
+    font-size: 1.1rem;
+  }
+  .main__card__header {
+    font-size: 2.05rem;
+  }
+  .main__card__body__form label,
+.main__card__body__form p, .main__card__body__form__buttons button, .main__card__body__form__buttons a {
+    font-size: 1.05rem;
+  }
+  .main__card__body__form__buttons a,
+.main__card__body__form__buttons button {
+    width: 30%;
+  }
+  .main__card__body__form .input-img img {
+    height: 4.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main__bars {
+    display: none;
+  }
+  .main .collapseMenu {
+    display: block !important;
+  }
+  .main__main-menu button {
+    max-width: 10.4rem;
+    font-size: 1.15rem;
+  }
+  .main__nav {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 0 1rem;
+    border-radius: 7px;
+    background-color: #508991;
+  }
+  .main__nav__list {
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+  }
+  .main__nav__list a {
+    background-color: #508991;
+  }
+  .main__nav__list a:hover {
+    color: #219ebc;
+    background-color: #508991;
+  }
+  .main__filter .radio-container svg {
+    font-size: 3rem;
+  }
+  .main__filter .radio-container a {
+    font-size: 1.05rem;
+  }
+  .main__filter h4 {
+    font-size: 1.25rem;
+  }
+  .main__filter label {
+    font-size: 1.1rem;
+  }
+  .main__filter button {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    font-size: 1.05rem;
+  }
+  .main__content h1 {
+    font-size: 2.215rem;
+  }
+  .main__content .content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .main__content .warning svg {
+    font-size: 7rem;
+  }
+  .main__content .warning a {
+    font-size: 1.1rem;
+  }
+  .main__card-management__body .card-text {
+    width: 73%;
+    font-size: 1.2rem;
+  }
+  .main__card-management__body a {
+    font-size: 1.15rem;
+  }
+  .main .confirm {
+    width: 65%;
+  }
+  .main__card__header {
+    font-size: 2.1rem;
+  }
+  .main__card__body__form label,
+.main__card__body__form p, .main__card__body__form__buttons button, .main__card__body__form__buttons a {
+    font-size: 1.1rem;
+  }
+  .main__card__body__form .input-img img {
+    height: 5rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .main__main-menu button {
+    max-width: 10.8rem;
+    font-size: 1.2rem;
+  }
+  .main__nav__list {
+    font-size: 1.3rem;
+  }
+  .main__filter .radio-container svg {
+    font-size: 3.05rem;
+  }
+  .main__filter .radio-container a {
+    font-size: 1.1rem;
+  }
+  .main__filter h4 {
+    font-size: 1.3rem;
+  }
+  .main__filter label {
+    font-size: 1.15rem;
+  }
+  .main__filter button {
+    width: 60%;
+    font-size: 1.1rem;
+  }
+  .main__content h1 {
+    font-size: 2.5rem;
+  }
+  .main__content .content-container .pokeball {
+    width: 25rem;
+    height: 25rem;
+  }
+  .main__content .content-container .pokeball__info {
+    width: 13rem;
+    height: 6.5rem;
+  }
+  .main__content .content-container .pokeball__info label {
+    font-size: 1.2rem;
+  }
+  .main__content .content-container .pokeball img {
+    height: 7.2rem;
+    top: 34%;
+    right: 34%;
+  }
+  .main__content .content-container .pokeball__delete, .main__content .content-container .pokeball__edit {
+    top: 55%;
+    font-size: 1.7rem;
+  }
+  .main__content .warning svg {
+    font-size: 8rem;
+  }
+  .main__content .warning a {
+    font-size: 1.15rem;
+  }
+  .main__card-management__body .card-text {
+    width: 80%;
+    font-size: 1.25rem;
+  }
+  .main__card-management__body a {
+    font-size: 1.2rem;
+  }
+  .main__card__header {
+    font-size: 2.15rem;
+  }
+  .main__card__body__form label,
+.main__card__body__form p, .main__card__body__form__buttons button, .main__card__body__form__buttons a {
+    font-size: 1.15rem;
+  }
+  .main__card__body__form .input-img img {
+    height: 5.2rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .main__main-menu button {
+    max-width: 11.1rem;
+    font-size: 1.25rem;
+  }
+  .main__nav__list {
+    font-size: 1.35rem;
+  }
+  .main__filter .radio-container svg {
+    font-size: 3.1rem;
+  }
+  .main__filter .radio-container a {
+    font-size: 1.15rem;
+  }
+  .main__filter h4 {
+    font-size: 1.35rem;
+  }
+  .main__filter label {
+    font-size: 1.2rem;
+  }
+  .main__filter button {
+    width: 70%;
+    font-size: 1.15rem;
+  }
+  .main__content h1 {
+    font-size: 2.7rem;
+  }
+  .main__content .warning svg {
+    font-size: 9rem;
+  }
+  .main__content .warning a {
+    font-size: 1.2rem;
+  }
+  .main__card-management__body .card-text {
+    width: 83%;
+    font-size: 1.3rem;
+  }
+  .main__card-management__body a {
+    font-size: 1.25rem;
+  }
+  .main__card__header {
+    font-size: 2.2rem;
+  }
+  .main__card__body__form label,
+.main__card__body__form p, .main__card__body__form__buttons button, .main__card__body__form__buttons a {
+    font-size: 1.2rem;
+  }
+  .main__card__body__form .input-img img {
+    height: 5.4rem;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .main__main-menu button {
+    max-width: 11.45rem;
+    font-size: 1.3rem;
+  }
+  .main__filter .radio-container svg {
+    font-size: 3.1rem;
+  }
+  .main__filter .radio-container a {
+    font-size: 1.15rem;
+  }
+  .main__nav__list {
+    font-size: 1.4rem;
+  }
+  .main__content h1 {
+    font-size: 3rem;
+  }
+  .main__content .content-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .main__content .warning svg {
+    font-size: 10rem;
+  }
+  .main__content .warning a {
+    font-size: 1.25rem;
+  }
+  .main__card-management__body .card-text {
+    width: 78%;
+    font-size: 1.4rem;
+  }
+  .main__card-management__body a {
+    font-size: 1.35rem;
+  }
+  .main__card__header {
+    font-size: 2.3rem;
+  }
+  .main__card__body__form label,
+.main__card__body__form p, .main__card__body__form__buttons button, .main__card__body__form__buttons a {
+    font-size: 1.25rem;
+  }
+  .main__card__body__form .input-img img {
+    height: 5.6rem;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

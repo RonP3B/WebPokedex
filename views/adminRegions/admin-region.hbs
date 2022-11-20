@@ -1,0 +1,87 @@
+<section class="main__section">
+  <div class="main__main-menu">
+    <a class="btn button default-button" href="/">volver al home</a>
+    <a class="btn button default-button" href="/admin-regions/add">
+      crear una región
+    </a>
+  </div>
+  <article class="main__content">
+    {{#if noRegions}}
+      <div class="warning">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        ><g fill="none"><path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m3 3l18 18"
+            ></path><path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M4.782 5.61L2.445 7.168A1 1 0 0 0 2 8v12a1 1 0 0 0 1.555.832L9 17.202l5.445 3.63a1 1 0 0 0 1.11 0l2.67-1.78L4.781 5.61zm16.834 11.178A1 1 0 0 0 22 16V4a1 1 0 0 0-1.555-.832L15 6.798l-5.445-3.63a1 1 0 0 0-1.11 0l-.269.18l13.44 13.44z"
+              clip-rule="evenodd"
+            ></path></g></svg>
+        <h1 class="text-center mb-0">no hay ninguna región registrada</h1>
+        <a href="/admin-regions/add" class="btn default-button">crear región</a>
+      </div>
+    {{else}}
+      <h1>listado de regiones</h1>
+      <div class="content-container">
+        {{#each regions}}
+          <div class="main__card card main__card-management">
+            <div class="main__card__header card-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.13em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 576 512"
+              ><path
+                  fill="currentColor"
+                  d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4c15.8-6.3 32.9 5.3 32.9 22.3v270.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zm-278.4-62.1c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6v251.4L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77v249.3l-192-54.9V255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40s17.9 40 40 40z"
+                ></path></svg>
+            </div>
+            <div class="main__card__body card-body main__card-management__body">
+              <p class="card-text"><strong>región:</strong> {{this.name}}</p>
+              <div>
+                <a
+                  class="btn btn-warning management-button"
+                  href="admin-regions/edit/{{this.id_region}}"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  ><path
+                      fill="currentColor"
+                      d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"
+                    ></path></svg>
+                </a>
+                <a
+                  class="btn btn-danger management-button"
+                  href="admin-regions/delete/{{this.id_region}}"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  ><path
+                      fill="currentColor"
+                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                    ></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </article>
+</section>

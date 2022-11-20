@@ -1,0 +1,79 @@
+<section class="main__section">
+  <div class="main__main-menu">
+    <a class="btn button default-button" href="/">volver al home</a>
+    <a class="btn button default-button" href="/admin-pokemon/add">
+      crear un pokemon
+    </a>
+  </div>
+  <article class="main__content">
+    {{#if noPokemon}}
+      <div class="warning">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        ><g
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          ><path
+              d="M20.04 16.048A9 9 0 0 0 7.957 3.958m-2.32 1.678a9 9 0 1 0 12.737 12.719"
+            ></path><path
+              d="M9.884 9.874a3 3 0 1 0 4.24 4.246m.57-3.441a3.012 3.012 0 0 0-1.41-1.39M3 12h6m7 0h5M3 3l18 18"
+            ></path></g></svg>
+        <h1 class="text-center mb-0">no hay ningún pokemon registrado</h1>
+        <a href="/admin-pokemon/add" class="btn default-button">crear pokemon</a>
+      </div>
+    {{else}}
+      <h1>listado de pokemones</h1>
+      <div class="content-container">
+        {{#each pokemon}}
+          <div class="pokeball">
+            <img src="{{this.photo_url}}" alt="{{this.name}}" />
+            <a
+              class="pokeball__edit btn btn-warning management-button"
+              href="/admin-pokemon/edit/{{this.id}}"
+            ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24"
+              ><path
+                  fill="currentColor"
+                  d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"
+                ></path></svg>
+            </a>
+            <a
+              class="pokeball__delete btn btn-danger management-button"
+              href="/admin-pokemon/delete/{{this.id}}"
+            ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24"
+              ><path
+                  fill="currentColor"
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                ></path></svg>
+            </a>
+            <div class="pokeball__red"></div>
+            <div class="pokeball__info">
+              <label><strong>nombre:</strong>
+                {{this.name}}</label>
+              <label><strong>tipo:</strong>
+                {{this.pokemon_type.dataValues.name}}</label>
+              <label><strong>región:</strong>
+                {{this.region.dataValues.name}}</label>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </article>
+</section>

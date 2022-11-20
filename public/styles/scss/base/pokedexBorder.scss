@@ -1,0 +1,14 @@
+.pokedex-border {
+  display: grid;
+  grid-template-columns: 1fr 90.2px 1fr;
+  position: relative;
+
+  span {
+    height: 5px;
+    background-color: #000;
+  }
+
+  .blue {
+    background-color: $mainBackground;
+  }
+}

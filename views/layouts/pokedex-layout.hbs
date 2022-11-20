@@ -1,0 +1,82 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Roniell Pérez" />
+    <meta
+      name="description"
+      content="Esta página que permite que el usuario lleve un manejo/mantenimiento de pokemones"
+    />
+    <link rel="shortcut icon" href="/assets/images/mainIcon.png" />
+    <link
+      rel="stylesheet"
+      href="/styles/css/libs/bootstrap/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/styles/css/styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <title>Pokedex</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="small-circle header__small-circle-l"></div>
+      <div class="medium-circle header__medium-circle-l"></div>
+      <div class="small-circle header__small-circle-r"></div>
+      <div class="medium-circle header__medium-circle-r"></div>
+      <div class="circle header__circle"></div>
+      <div class="pokedex-border header__pokedex-border">
+        <span></span>
+        <span class="blue"></span>
+        <span></span>
+      </div>
+    </header>
+    <main class="main container">
+      <button class="main__bars default-button" id="btn-navMenu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1.38em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 22 16"
+        ><path
+            fill="currentColor"
+            d="M0 3h14v3H0V3zm0 4h14v3H0V7zm0 4h14v3H0v-3zm15.5-4l3 3l3-3z"
+          ></path></svg>
+      </button>
+      <div class="collapseMenu" style="display: none;">
+        <nav class="main__nav">
+          <ul class="main__nav__list">
+            <li><a href="/">home</a></li>
+            <li><a href="/admin-pokemon">pokemones</a></li>
+            <li><a href="/admin-regions">regiones</a></li>
+            <li><a href="/admin-types">tipo de pokemones</a></li>
+          </ul>
+        </nav>
+      </div>
+      {{{body}}}
+    </main>
+    <footer class="footer">
+      <div class="small-circle footer__small-circle-l"></div>
+      <div class="medium-circle footer__medium-circle-l"></div>
+      <div class="small-circle footer__small-circle-r"></div>
+      <div class="medium-circle footer__medium-circle-r"></div>
+      <div class="circle footer__circle"></div>
+      <div class="pokedex-border">
+        <span></span>
+        <span class="blue"></span>
+        <span></span>
+      </div>
+    </footer>
+  </body>
+  <script src="/js/libs/bootstrap/bootstrap.min.js"></script>
+  <script src="/js/libs/jquery/jquery-3.6.0.min.js"></script>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/toastify-js"
+  ></script>
+  <script src="/js/index.js" type="module"></script>
+</html>

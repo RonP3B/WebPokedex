@@ -1,0 +1,130 @@
+.main {
+  @include medium {
+    &__bars {
+      display: none;
+    }
+
+    .collapseMenu {
+      display: block !important;
+    }
+
+    &__main-menu {
+      button {
+        max-width: 10.4rem;
+        font-size: 1.15rem;
+      }
+    }
+
+    &__nav {
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%;
+      padding: 0 1rem;
+      border-radius: 7px;
+      background-color: $darkGreen;
+
+      &__list {
+        font-size: 1.25rem;
+        display: flex;
+        justify-content: center;
+
+        a {
+          background-color: $darkGreen;
+
+          &:hover {
+            color: $darkBlue;
+            background-color: $darkGreen;
+          }
+        }
+      }
+    }
+
+    &__filter {
+      .radio-container {
+        svg {
+          font-size: 3rem;
+        }
+
+        a {
+          font-size: 1.05rem;
+        }
+      }
+
+      h4 {
+        font-size: 1.25rem;
+      }
+
+      label {
+        font-size: 1.1rem;
+      }
+
+      button {
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+        font-size: 1.05rem;
+      }
+    }
+
+    &__content {
+      h1 {
+        font-size: 2.215rem;
+      }
+
+      .content-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .warning {
+        svg {
+          font-size: 7rem;
+        }
+
+        a {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    &__card-management {
+      &__body {
+        .card-text {
+          width: 73%;
+          font-size: 1.2rem;
+        }
+
+        a {
+          font-size: 1.15rem;
+        }
+      }
+    }
+
+    .confirm {
+      width: 65%;
+    }
+
+    &__card {
+      &__header {
+        font-size: 2.1rem;
+      }
+
+      &__body {
+        &__form {
+          label,
+          p,
+          &__buttons button,
+          &__buttons a {
+            font-size: 1.1rem;
+          }
+
+          .input-img {
+            img {
+              height: 5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

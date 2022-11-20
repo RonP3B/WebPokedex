@@ -1,0 +1,8 @@
+body {
+  font-family: $mainFont;
+  background-color: $mainBackground;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

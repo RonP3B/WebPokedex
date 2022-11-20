@@ -1,0 +1,58 @@
+.header {
+  background-color: $red;
+  height: 5rem;
+  overflow: hidden;
+
+  &__circle::after {
+    border-radius: 100% 100% 0 0;
+    top: 28px;
+  }
+
+  &__small-circle-l,
+  &__small-circle-r {
+    &::after {
+      top: -32px;
+    }
+  }
+
+  &__medium-circle-l,
+  &__medium-circle-r {
+    &::after {
+      top: -56px;
+    }
+  }
+
+  &__small-circle-l,
+  &__medium-circle-l {
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+
+  &__small-circle-r,
+  &__medium-circle-r {
+    &::after {
+      transform: rotate(135deg);
+    }
+  }
+
+  &__small-circle-l::after {
+    left: -32px;
+  }
+
+  &__small-circle-r::after {
+    right: -32px;
+  }
+
+  &__medium-circle-l::after {
+    left: -56px;
+  }
+
+  &__medium-circle-r::after {
+    right: -56px;
+  }
+
+  &__pokedex-border {
+    bottom: -75px;
+  }
+}

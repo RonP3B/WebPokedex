@@ -1,0 +1,128 @@
+<section class="main__section">
+  <div class="main__main-menu">
+    <button class="btn button default-button" id="btn-search">buscar por nombre</button>
+    <button class="btn button default-button" id="btn-filter">filtrar por región</button>
+  </div>
+  <div class="main__accordion-group">
+    <div class="collapseSearch" style="display: none;">
+      <form action="/?post=name" method="POST" class="main__search">
+        <input
+          type="text"
+          name="value"
+          class="form-control required-field"
+          placeholder="Ingresa el nombre del pokemon..."
+          {{#if (equal ./post "name")}} 
+            value="{{data}}"
+          {{/if}}
+        />
+        <button id="btn-submitSearch" type="button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          ><path
+              fill="currentColor"
+              d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"
+            ></path></svg>
+        </button>
+      </form>
+    </div>
+    <div class="collapseFilter" style="display: none;">
+      <form action="/?post=regionIdRegion" method="POST" class="main__filter">
+        <h4>selecciona la región</h4>
+        <div class="radio-container">
+          {{#if noRegions}}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 24 24"
+            ><g fill="none"><path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m3 3l18 18"
+                ></path><path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M4.782 5.61L2.445 7.168A1 1 0 0 0 2 8v12a1 1 0 0 0 1.555.832L9 17.202l5.445 3.63a1 1 0 0 0 1.11 0l2.67-1.78L4.781 5.61zm16.834 11.178A1 1 0 0 0 22 16V4a1 1 0 0 0-1.555-.832L15 6.798l-5.445-3.63a1 1 0 0 0-1.11 0l-.269.18l13.44 13.44z"
+                  clip-rule="evenodd"
+                ></path></g></svg>
+            <p class="text-center mb-0">no hay ninguna región registrada</p>
+            <a href="/admin-regions" class="btn default-button">mantenimiento de regiones</a>
+          {{else}}
+            {{#each regions}}
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="value"
+                  id="{{this.name}}"
+                  value="{{this.id_region}}"
+                  {{#if (equal ../post "regionIdRegion")}} 
+                    {{#if (equal ../data this.id_region)}}checked{{/if}}
+                  {{/if}}
+                />
+                <label class="form-check-label" for="{{this.name}}">
+                  {{this.name}}
+                </label>
+              </div>
+            {{/each}}
+          {{/if}}
+        </div>
+        <button
+          type="button"
+          class="btn default-button"
+          id="btn-submitFilter"
+        >filtrar</button>
+      </form>
+    </div>
+  </div>
+  <article class="main__content">
+    {{#if noPokemon}}
+      <div class="warning">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24"
+        ><g
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          ><path
+              d="M20.04 16.048A9 9 0 0 0 7.957 3.958m-2.32 1.678a9 9 0 1 0 12.737 12.719"
+            ></path><path
+              d="M9.884 9.874a3 3 0 1 0 4.24 4.246m.57-3.441a3.012 3.012 0 0 0-1.41-1.39M3 12h6m7 0h5M3 3l18 18"
+            ></path></g></svg>
+        <h1 class="text-center mb-0">{{warningTitle}}</h1>
+        <a href="/admin-pokemon" class="btn default-button">mantenimiento de pokemones</a>
+      </div>
+    {{else}}
+      <h1>listado de pokemones</h1>
+      <div class="content-container">
+        {{#each pokemon}}
+          <div class="pokeball">
+            <img src="{{this.photo_url}}" alt="{{this.name}}" />
+            <div class="pokeball__red"></div>
+            <div class="pokeball__info">
+              <label><strong>nombre:</strong>
+                {{this.name}}</label>
+              <label><strong>tipo:</strong>
+                {{this.pokemon_type.dataValues.name}}</label>
+              <label><strong>región:</strong>
+                {{this.region.dataValues.name}}</label>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </article>
+</section>

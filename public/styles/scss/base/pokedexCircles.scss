@@ -1,0 +1,39 @@
+.circle,
+.small-circle,
+.medium-circle {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+  }
+}
+
+.small-circle,
+.medium-circle {
+  &::after {
+    border-radius: 100%;
+    border: 3.5px solid;
+    border-color: transparent $darkRed transparent transparent;
+  }
+}
+
+.circle::after {
+  height: 7rem;
+  width: 7rem;
+  border: 10px solid #000;
+  background-color: $mainBackground;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.small-circle::after {
+  height: 4rem;
+  width: 4rem;
+}
+
+.medium-circle::after {
+  height: 7rem;
+  width: 7rem;
+}
