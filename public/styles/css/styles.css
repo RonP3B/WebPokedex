@@ -420,6 +420,7 @@ body {
 }
 .main__card__body__form .input-img img {
   height: 4rem;
+  width: 4rem;
   border: 2px solid #6a040f;
 }
 
@@ -497,6 +498,7 @@ body {
   border-radius: 50%;
   border: 3px solid #000;
   height: 6rem;
+  width: 6rem;
   top: 33%;
   right: 33%;
 }
@@ -541,6 +543,7 @@ body {
   }
   .main__content .content-container .pokeball img {
     height: 6.5rem;
+    width: 6.5rem;
   }
   .main__content .warning svg {
     font-size: 6rem;
@@ -568,6 +571,7 @@ body {
   }
   .main__card__body__form .input-img img {
     height: 4.5rem;
+    width: 4.5rem;
   }
 }
 
@@ -652,6 +656,7 @@ body {
   }
   .main__card__body__form .input-img img {
     height: 5rem;
+    width: 5rem;
   }
 }
 
@@ -695,6 +700,7 @@ body {
   }
   .main__content .content-container .pokeball img {
     height: 7.2rem;
+    width: 7.2rem;
     top: 34%;
     right: 34%;
   }
@@ -724,6 +730,7 @@ body {
   }
   .main__card__body__form .input-img img {
     height: 5.2rem;
+    width: 5.2rem;
   }
 }
 
@@ -776,6 +783,7 @@ body {
   }
   .main__card__body__form .input-img img {
     height: 5.4rem;
+    width: 5.4rem;
   }
 }
 
@@ -821,6 +829,7 @@ body {
   }
   .main__card__body__form .input-img img {
     height: 5.6rem;
+    width: 5.6rem;
   }
 }
 
