@@ -1,94 +1,107 @@
+const internalErrorRes = require("../util/helpers/res/internalErrorRes");
 const crypto = require("crypto");
 const PokemonType = require("../models/PokemonType");
 
-exports.getTypes = (req, res, next) => {
-  PokemonType.findAll()
-    .then((result) => {
-      const types = result.map((result) => result.dataValues);
+exports.getTypes = async (req, res, next) => {
+  try {
+    const typeObj = await PokemonType.findAll();
+    const types = typeObj.map((res) => res.dataValues);
 
-      res.render("adminTypes/admin-types", {
-        types,
-        noTypes: types.length === 0,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+    res.render("adminTypes/admin-types", {
+      types,
+      noTypes: types.length === 0,
     });
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
 };
 
 exports.getAddTypes = (req, res, next) => {
   res.render("adminTypes/save-type", { edit: false });
 };
 
-exports.getEditTypes = (req, res, next) => {
-  const id = req.params.id;
+exports.getEditTypes = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const typeObj = await PokemonType.findOne({ where: { id_type: id } });
 
-  PokemonType.findOne({ where: { id_type: id } })
-    .then((result) => {
-      const type = result.dataValues;
-      if (!type) return res.redirect("/admin-types");
-      res.render("adminTypes/save-type", { edit: true, type });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    if (!typeObj) return res.redirect("/admin-types");
+
+    const type = typeObj.dataValues;
+
+    res.render("adminTypes/save-type", { edit: true, type });
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
 };
 
-exports.getDeleteTypes = (req, res, next) => {
-  const id = req.params.id;
+exports.getDeleteTypes = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const typeObj = await PokemonType.findOne({ where: { id_type: id } });
 
-  PokemonType.findOne({ where: { id_type: id } })
-    .then((result) => {
-      const type = result.dataValues;
+    if (!typeObj) return res.redirect("/admin-types");
 
-      if (!type) return res.redirect("/admin-types");
+    const type = typeObj.dataValues;
 
-      res.render("confirm", {
-        model: "tipo",
-        modelMsg: "este tipo",
-        page: "types",
-        id: type.id_type,
-        name: type.name,
+    res.render("confirm", {
+      model: "tipo",
+      modelMsg: "este tipo",
+      page: "types",
+      id: type.id_type,
+      name: type.name,
+    });
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
+};
+
+exports.postAddTypes = async (req, res, next) => {
+  try {
+    const name = req.body.name;
+
+    if (name) {
+      await PokemonType.create({
+        id_type: crypto.randomUUID(),
+        name,
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    }
+
+    res.redirect("/admin-types");
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
 };
 
-exports.postAddTypes = (req, res, next) => {
-  PokemonType.create({
-    id_type: crypto.randomUUID(),
-    name: req.body.name,
-  })
-    .then((result) => {
-      res.redirect("/admin-types");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+exports.postEditTypes = async (req, res, next) => {
+  try {
+    const { id, name } = req.body;
+
+    if (id && name) {
+      await PokemonType.update(
+        { name, id_type: id },
+        { where: { id_type: id } }
+      );
+    }
+
+    res.redirect("/admin-types");
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
 };
 
-exports.postEditTypes = (req, res, next) => {
-  const { id, name } = req.body;
-
-  PokemonType.update({ name, id_type: id }, { where: { id_type: id } })
-    .then((result) => {
-      return res.redirect("/admin-types");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-exports.postDeleteTypes = (req, res, next) => {
-  const id = req.body.id;
-
-  PokemonType.destroy({ where: { id_type: id } })
-    .then((result) => {
-      res.redirect("/admin-types");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+exports.postDeleteTypes = async (req, res, next) => {
+  try {
+    const id = req.body.id;
+    await PokemonType.destroy({ where: { id_type: id } });
+    res.redirect("/admin-types");
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
 };
