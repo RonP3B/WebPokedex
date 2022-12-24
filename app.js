@@ -3,12 +3,14 @@
 require("dotenv").config();
 const express = require("express");
 const { engine } = require("express-handlebars");
+const multer = require("multer");
 const equal = require("./util/helpers/hbs/equal");
 const path = require("path");
 const sequelize = require("./util/databaseObj");
 const Pokemon = require("./models/Pokemon");
 const PokemonType = require("./models/PokemonType");
 const Region = require("./models/Region");
+const imgStorage = require("./util/imgStorage")
 const { home, pokemon, regions, types, notFound } = require("./routes/index");
 
 const app = express();
@@ -28,6 +30,7 @@ app.set("views", "views");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(multer({ storage: imgStorage }).single("image"));
 app.use(home);
 app.use("/admin-pokemon", pokemon);
 app.use("/admin-regions", regions);
