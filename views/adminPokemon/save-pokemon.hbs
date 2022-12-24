@@ -52,22 +52,22 @@
           method="POST"
           action="/admin-pokemon/{{#if edit}}edit{{else}}add{{/if}}"  
           class="main__card__body__form"
+          enctype="multipart/form-data"
         >
           <div class="form-group mb-2 input-img">
             {{#if edit}}
               <picture>
                 <label>foto actual:</label>
-                <img src="{{pokemon.photo_url}}" alt="{{pokemon.name}}" />
+                <img src="/assets/images/uploaded/{{pokemon.photo_path}}" alt="{{pokemon.name}}" />
               </picture>
             {{/if}}
             <div>
-              <label for="image">foto del pokemon (URL):</label>
+              <label for="image">foto del pokemon:</label>
               <input
-                class="form-control form-control-sm required-field"
-                type="text"
+                class="form-control form-control-sm {{#unless edit}}required-field{{/unless}}"
+                type="file"
                 id="image"
                 name="image"
-                autofocus
                 {{#if edit}}value="{{pokemon.photo_url}}"{{/if}} 
               />
             </div>

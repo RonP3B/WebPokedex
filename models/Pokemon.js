@@ -14,7 +14,7 @@ const Pokemon = sequelizeObj.define("pokemons", {
     allowNull: false,
   },
 
-  photo_url: {
+  photo_path: {
     type: Sequelize.TEXT("long"),
     allowNull: false,
   },

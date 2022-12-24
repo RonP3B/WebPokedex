@@ -33,7 +33,10 @@
       <div class="content-container">
         {{#each pokemon}}
           <div class="pokeball">
-            <img src="{{this.photo_url}}" alt="{{this.name}}" />
+            <img
+              src="/assets/images/uploaded/{{this.photo_path}}"
+              alt="{{this.name}}"
+            />
             <a
               class="pokeball__edit btn btn-warning management-button"
               href="/admin-pokemon/edit/{{this.id}}"

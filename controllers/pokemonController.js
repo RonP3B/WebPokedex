@@ -1,5 +1,6 @@
 const internalErrorRes = require("../util/helpers/res/internalErrorRes");
 const crypto = require("crypto");
+const fs = require("fs")
 const Region = require("../models/Region");
 const PokemonType = require("../models/PokemonType");
 const Pokemon = require("../models/Pokemon");
@@ -99,37 +100,52 @@ exports.getDeletePokemon = async (req, res, next) => {
 
 exports.postAddPokemon = async (req, res, next) => {
   try {
-    const { image, name, region, type } = req.body;
+    const { name, region, type } = req.body;
+    const imgFile = req.file
 
-    if (image && name && region && type) {
+    if (imgFile && name && region && type) {
       await Pokemon.create({
         id: crypto.randomUUID(),
         regionIdRegion: region,
         pokemonTypeIdType: type,
         name,
-        photo_url: image,
+        photo_path: imgFile.filename,
       });
     }
 
     res.redirect("/admin-pokemon");
-  } catch (error) {}
+  } catch (error) {
+    console.log(`\nError: ${error}\n`);
+    internalErrorRes(res);
+  }
 };
 
 exports.postEditPokemon = async (req, res, next) => {
   try {
-    const { id, image, name, region, type } = req.body;
+    const { id, name, region, type } = req.body;
+    const imgFile = req.file
 
-    if (image && name && region && type && id) {
-      await Pokemon.update(
-        {
-          name,
-          regionIdRegion: region,
-          pokemonTypeIdType: type,
-          photo_url: image,
-        },
-        { where: { id } }
+    if (!name || !region || !type || !id) {
+      return res.redirect("/admin-pokemon");
+    }
+
+    const pokemon = await Pokemon.findByPk(id)
+    const photoPath = pokemon.dataValues.photo_path
+
+    if (imgFile && imgFile.filename !== photoPath) {
+      fs.unlinkSync(
+        `./public/assets/images/uploaded/${photoPath}`
       );
     }
+
+    await pokemon.update(
+      {
+        name,
+        regionIdRegion: region,
+        pokemonTypeIdType: type,
+        photo_path: imgFile ? imgFile.filename : pokemon.dataValues.photo_path,
+      }
+    );
 
     res.redirect("/admin-pokemon");
   } catch (error) {
@@ -141,7 +157,15 @@ exports.postEditPokemon = async (req, res, next) => {
 exports.postDeletePokemon = async (req, res, next) => {
   try {
     const id = req.body.id;
-    await Pokemon.destroy({ where: { id } });
+
+    const pokemon = await Pokemon.findByPk(id);
+
+    if (pokemon) {
+      const img = pokemon.dataValues.photo_path;
+      fs.unlinkSync(`./public/assets/images/uploaded/${img}`);
+      await pokemon.destroy();
+    }
+
     res.redirect("/admin-pokemon");
   } catch (error) {
     console.log(`\nError: ${error}\n`);
