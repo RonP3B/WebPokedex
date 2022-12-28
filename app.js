@@ -7,7 +7,7 @@ const session = require("express-session");
 const multer = require("multer");
 const flash = require("connect-flash");
 const path = require("path");
-const MemoryStore = require('memorystore')(session);
+const SessionStore = require("express-session-sequelize")(session.Store);
 const { Pokemon, PokemonType, Region, User } = require("./exports/models")
 const { auth, home, pokemon, regions, types, notFound } = require("./exports/routes");
 const { sequelize, imgStorage } = require("./exports/utils");
@@ -36,7 +36,7 @@ app.use(session({
   secret: "mysecret",
   resave: true,
   saveUninitialized: false,
-  store: new MemoryStore({ checkPeriod: 86400000 }),
+  store: new SessionStore({ db: sequelize })
 }));
 app.use(flash());
 app.use(addReqUser);
