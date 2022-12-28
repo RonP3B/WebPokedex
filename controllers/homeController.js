@@ -1,12 +1,11 @@
 const internalErrorRes = require("../util/helpers/res/internalErrorRes");
-const Pokemon = require("../models/Pokemon");
-const Region = require("../models/Region");
-const PokemonType = require("../models/PokemonType");
+const { Pokemon, Region, PokemonType } = require("../exports/models");
 
 exports.getHome = async (req, res, next) => {
   try {
-    const regionsObj = await Region.findAll();
+    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
     const pokemonObj = await Pokemon.findAll({
+      where: { user_id: req.user.id },
       include: [
         {
           model: Region,
@@ -21,6 +20,7 @@ exports.getHome = async (req, res, next) => {
     const pokemon = pokemonObj.map((res) => res.dataValues);
 
     res.render("home", {
+      nav: true,
       warningTitle: "no hay ningún pokemon registrado",
       pokemon,
       regions,
@@ -38,9 +38,9 @@ exports.postHome = async (req, res, next) => {
     const post = req.query.post;
     const data = req.body.value;
     const msg = post === "name" ? "con ese nombre" : "de esa región";
-    const regionsObj = await Region.findAll();
+    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
     const pokemonObj = await Pokemon.findAll({
-      where: { [post]: data },
+      where: { [post]: data, user_id: req.user.id },
       include: [
         {
           model: Region,
@@ -55,6 +55,7 @@ exports.postHome = async (req, res, next) => {
     const pokemon = pokemonObj.map((res) => res.dataValues);
 
     res.render("home", {
+      nav: true,
       warningTitle: `no hay ningún pokemon ${msg}`,
       pokemon,
       regions,

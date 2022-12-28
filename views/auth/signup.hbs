@@ -1,0 +1,71 @@
+<section>
+  <div class="main__card card">
+    <div class="main__card__header card-header">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1em"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 24 24"
+      ><path
+          fill="currentColor"
+          d="M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4a4 4 0 0 0-4-4a4 4 0 0 0-4 4a4 4 0 0 0 4 4Z"
+        ></path>
+      </svg>
+      <h5 class="mb-0">Registro de usuario</h5>
+    </div>
+    <div class="main__card__body card-body">
+      <form method="POST" action="/sign-up" class="main__card__body__form">
+        <div class="form-group mb-2">
+          <label for="username">nombre de usuario:</label>
+          <input
+            class="form-control form-control-sm required-field"
+            type="text"
+            id="username"
+            name="username"
+            autofocus
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="email">Correo electronico:</label>
+          <input
+            class="form-control form-control-sm required-field"
+            type="email"
+            id="email"
+            name="email"
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="password">contraseña:</label>
+          <input
+            class="form-control form-control-sm required-field"
+            type="password"
+            id="password"
+            name="password"
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="confirmPassword">confirmar contraseña:</label>
+          <input
+            class="form-control form-control-sm required-field"
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+          />
+        </div>
+        <div class="main__card__body__form__buttons">
+          <a href="/" class="btn btn-warning management-button">
+            volver
+          </a>
+          <button
+            type="button"
+            class="btn btn-danger management-button ms-1"
+            id="btn-signup"
+          >
+            Registrar usuario
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

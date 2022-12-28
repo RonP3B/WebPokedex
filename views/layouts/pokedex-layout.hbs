@@ -35,28 +35,32 @@
       </div>
     </header>
     <main class="main container">
-      <button class="main__bars default-button" id="btn-navMenu">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="1.38em"
-          height="1em"
-          preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 22 16"
-        ><path
-            fill="currentColor"
-            d="M0 3h14v3H0V3zm0 4h14v3H0V7zm0 4h14v3H0v-3zm15.5-4l3 3l3-3z"
-          ></path></svg>
-      </button>
-      <div class="collapseMenu" style="display: none;">
-        <nav class="main__nav">
-          <ul class="main__nav__list">
-            <li><a href="/">home</a></li>
-            <li><a href="/admin-pokemon">pokemones</a></li>
-            <li><a href="/admin-regions">regiones</a></li>
-            <li><a href="/admin-types">tipo de pokemones</a></li>
-          </ul>
-        </nav>
-      </div>
+      {{#if nav}}
+        <button class="main__bars default-button" id="btn-navMenu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.38em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 22 16"
+          ><path
+              fill="currentColor"
+              d="M0 3h14v3H0V3zm0 4h14v3H0V7zm0 4h14v3H0v-3zm15.5-4l3 3l3-3z"
+            ></path></svg>
+        </button>
+        <div class="collapseMenu" style="display: none;">
+          <nav class="main__nav">
+            <ul class="main__nav__list">
+              <li><a href="/pokemon">home</a></li>
+              <li><a href="/admin-pokemon">pokemones</a></li>
+              <li><a href="/admin-regions">regiones</a></li>
+              <li><a href="/admin-types">tipo de pokemones</a></li>
+              <li><a href="/log-out">cerrar sesión</a></li>
+            </ul>
+          </nav>
+        </div>
+      {{/if}}
+
       {{{body}}}
     </main>
     <footer class="footer">
@@ -78,5 +82,17 @@
     type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/toastify-js"
   ></script>
+
+  {{! Backend toasts }}
+  {{#if hasMessages}}
+    <script src="/js/backendToast.js"></script>
+    {{#each messages}}
+      <script type="text/javascript">
+        showBackendToast({{{json this}}})
+      </script>
+    {{/each}}
+  {{/if}}
+  {{! Backend toasts }}
+
   <script src="/js/index.js" type="module"></script>
 </html>

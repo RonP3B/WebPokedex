@@ -5,7 +5,7 @@
   </div>
   <div class="main__accordion-group">
     <div class="collapseSearch" style="display: none;">
-      <form action="/?post=name" method="POST" class="main__search">
+      <form action="/pokemon?post=name" method="POST" class="main__search">
         <input
           type="text"
           name="value"
@@ -30,7 +30,7 @@
       </form>
     </div>
     <div class="collapseFilter" style="display: none;">
-      <form action="/?post=regionIdRegion" method="POST" class="main__filter">
+      <form action="/pokemon?post=regionIdRegion" method="POST" class="main__filter">
         <h4>selecciona la región</h4>
         <div class="radio-container">
           {{#if noRegions}}

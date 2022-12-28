@@ -1,0 +1,58 @@
+<section>
+  <div class="main__card card">
+    <div class="main__card__header card-header">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1em"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 24 24"
+      ><path
+          fill="currentColor"
+          d="M17 3h-3v3h-4V3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-5 5a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m4 8H8v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1M13 5h-2V1h2v4m3 14H8v-1h8v1m-4 2H8v-1h4v1Z"
+        ></path></svg>
+      <h5 class="mb-0">Autenticación de usuario</h5>
+    </div>
+    <div class="main__card__body card-body">
+      <form method="POST" action="/" class="main__card__body__form">
+        <div class="form-group mb-2">
+          <label for="username">nombre de usuario:</label>
+          <input
+            class="form-control form-control-sm required-field"
+            type="text"
+            id="username"
+            name="username"
+            autofocus
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="password">Contraseña:</label>
+          <input
+            class="form-control form-control-sm required-field"
+            type="password"
+            id="password"
+            name="password"
+          />
+        </div>
+        <div class="main__card__body__form__buttons">
+          <a href="/sign-up" class="btn btn-warning management-button">
+            Registrarse
+          </a>
+          <button
+            type="button"
+            class="btn btn-danger management-button ms-1"
+            id="btn-save"
+          >
+            Iniciar sesión
+          </button>
+        </div>
+        <div class="text-center mt-2">
+          <a href="/forgot-password/find-user">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>

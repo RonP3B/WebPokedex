@@ -4,10 +4,11 @@ const Region = require("../models/Region");
 
 exports.getRegions = async (req, res, next) => {
   try {
-    const regionObj = await Region.findAll();
+    const regionObj = await Region.findAll({ where: { user_id: req.user.id } });
     const regions = regionObj.map((res) => res.dataValues);
 
     res.render("adminRegions/admin-region", {
+      nav: true,
       regions,
       noRegions: regions.length === 0,
     });
@@ -24,7 +25,7 @@ exports.getAddRegion = (req, res, next) => {
 exports.getEditRegion = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const regionObj = await Region.findOne({ where: { id_region: id } });
+    const regionObj = await Region.findOne({ where: { id_region: id, user_id: req.user.id } });
 
     if (!regionObj) return res.redirect("/admin-regions");
 
@@ -40,7 +41,7 @@ exports.getEditRegion = async (req, res, next) => {
 exports.getDeleteRegion = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const regionObj = await Region.findOne({ where: { id_region: id } });
+    const regionObj = await Region.findOne({ where: { id_region: id, user_id: req.user.id } });
 
     if (!regionObj) return res.redirect("/admin-regions");
 
@@ -66,8 +67,11 @@ exports.postAddRegion = async (req, res, next) => {
     if (name) {
       await Region.create({
         id_region: crypto.randomUUID(),
-        name,
+        user_id: req.user.id,
+        name
       });
+
+      req.flash("msg", "Region creada con exito");
     }
 
     res.redirect("/admin-regions");
@@ -83,9 +87,11 @@ exports.postEditRegion = async (req, res, next) => {
 
     if (id && name) {
       await Region.update(
-        { name, id_region: id },
-        { where: { id_region: id } }
+        { name },
+        { where: { id_region: id, user_id: req.user.id } }
       );
+
+      req.flash("msg", "Region editada con exito");
     }
 
     res.redirect("/admin-regions");
@@ -98,7 +104,13 @@ exports.postEditRegion = async (req, res, next) => {
 exports.postDeleteRegion = async (req, res, next) => {
   try {
     const id = req.body.id;
-    await Region.destroy({ where: { id_region: id } });
+    const region = await Region.findOne({ where: { id_region: id, user_id: req.user.id } });
+
+    if (region) {
+      await region.destroy();
+      req.flash("msg", "Region eliminada con exito");
+    }
+
     res.redirect("/admin-regions");
   } catch (error) {
     console.log(`\nError: ${error}\n`);

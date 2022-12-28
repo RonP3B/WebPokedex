@@ -13,6 +13,11 @@ const Region = sequelizeObj.define("regions", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+
+  user_id: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  }
 });
 
 module.exports = Region;

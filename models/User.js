@@ -2,22 +2,27 @@ const Sequelize = require("sequelize");
 
 const sequelizeObj = require("../util/databaseObj");
 
-const PokemonType = sequelizeObj.define("pokemon_type", {
-  id_type: {
+const User = sequelizeObj.define("users", {
+  id: {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true,
   },
 
-  name: {
+  username: {
     type: Sequelize.STRING,
     allowNull: false,
   },
 
-  user_id: {
+  email: {
     type: Sequelize.STRING,
     allowNull: false,
-  }
+  },
+
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 });
 
-module.exports = PokemonType;
+module.exports = User;

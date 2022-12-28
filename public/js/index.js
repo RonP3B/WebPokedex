@@ -1,12 +1,14 @@
 "use strict";
 
 import { collapseElement } from "./helpers/collapse.js";
-
 import {
   validateForm,
   checkRequiredFields,
   checkRadioButton,
+  validateSignUp,
+  validateResetPassword
 } from "./helpers/formHelpers/index.js";
+
 
 $(() => {
   //--------------------------------Protos------------------------------------
@@ -24,6 +26,16 @@ $(() => {
   $("#btn-filter").click(() =>
     collapseElement("collapseFilter", "collapseSearch")
   );
+
+  $("#btn-signup").click(() => validateForm(
+    "main__card__body__form",
+    validateSignUp,
+  ));
+
+  $("#btn-reset").click(() => validateForm(
+    "main__card__body__form",
+    validateResetPassword,
+  ));
 
   $("#btn-submitSearch").click(() =>
     validateForm(

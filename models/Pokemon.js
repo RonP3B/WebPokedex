@@ -18,6 +18,11 @@ const Pokemon = sequelizeObj.define("pokemons", {
     type: Sequelize.TEXT("long"),
     allowNull: false,
   },
+
+  user_id: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  }
 });
 
 module.exports = Pokemon;

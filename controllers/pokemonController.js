@@ -1,13 +1,12 @@
 const internalErrorRes = require("../util/helpers/res/internalErrorRes");
+const { Pokemon, Region, PokemonType } = require("../exports/models");
 const crypto = require("crypto");
 const fs = require("fs")
-const Region = require("../models/Region");
-const PokemonType = require("../models/PokemonType");
-const Pokemon = require("../models/Pokemon");
 
 exports.getPokemon = async (req, res, next) => {
   try {
     const pokemonObj = await Pokemon.findAll({
+      where: { user_id: req.user.id },
       include: [
         {
           model: Region,
@@ -18,9 +17,10 @@ exports.getPokemon = async (req, res, next) => {
       ],
     });
 
-    const pokemon = pokemonObj.map((res) => res.dataValues);
+    const pokemon = pokemonObj.map((res) => res.get({ plain: true }));
 
     res.render("adminPokemon/admin-pokemon", {
+      nav: true,
       pokemon,
       noPokemon: pokemon.length === 0,
     });
@@ -32,8 +32,9 @@ exports.getPokemon = async (req, res, next) => {
 
 exports.getAddPokemon = async (req, res, next) => {
   try {
-    const regionsObj = await Region.findAll();
-    const typesObj = await PokemonType.findAll();
+    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
+    const typesObj = await PokemonType.findAll({ where: { user_id: req.user.id } });
+
     const regions = regionsObj.map((res) => res.dataValues);
     const types = typesObj.map((res) => res.dataValues);
 
@@ -52,9 +53,11 @@ exports.getAddPokemon = async (req, res, next) => {
 exports.getEditpokemon = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const regionsObj = await Region.findAll();
-    const typesObj = await PokemonType.findAll();
-    const pokemonObj = await Pokemon.findOne({ where: { id } });
+
+    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
+    const typesObj = await PokemonType.findAll({ where: { user_id: req.user.id } });
+    const pokemonObj = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
+
     const regions = regionsObj.map((res) => res.dataValues);
     const types = typesObj.map((res) => res.dataValues);
 
@@ -80,7 +83,7 @@ exports.getEditpokemon = async (req, res, next) => {
 exports.getDeletePokemon = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const pokemonObj = await Pokemon.findOne({ where: { id } });
+    const pokemonObj = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
 
     if (!pokemonObj) return res.redirect("/admin-pokemon");
 
@@ -101,7 +104,7 @@ exports.getDeletePokemon = async (req, res, next) => {
 exports.postAddPokemon = async (req, res, next) => {
   try {
     const { name, region, type } = req.body;
-    const imgFile = req.file
+    const imgFile = req.file;
 
     if (imgFile && name && region && type) {
       await Pokemon.create({
@@ -110,7 +113,10 @@ exports.postAddPokemon = async (req, res, next) => {
         pokemonTypeIdType: type,
         name,
         photo_path: imgFile.filename,
+        user_id: req.user.id
       });
+
+      req.flash("msg", "Pokemon creado con exito");
     }
 
     res.redirect("/admin-pokemon");
@@ -129,7 +135,7 @@ exports.postEditPokemon = async (req, res, next) => {
       return res.redirect("/admin-pokemon");
     }
 
-    const pokemon = await Pokemon.findByPk(id)
+    const pokemon = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
     const photoPath = pokemon.dataValues.photo_path
 
     if (imgFile && imgFile.filename !== photoPath) {
@@ -143,10 +149,11 @@ exports.postEditPokemon = async (req, res, next) => {
         name,
         regionIdRegion: region,
         pokemonTypeIdType: type,
-        photo_path: imgFile ? imgFile.filename : pokemon.dataValues.photo_path,
+        photo_path: imgFile ? imgFile.filename : pokemon.dataValues.photo_path
       }
     );
 
+    req.flash("msg", "Pokemon editado con exito");
     res.redirect("/admin-pokemon");
   } catch (error) {
     console.log(`\nError: ${error}\n`);
@@ -158,12 +165,16 @@ exports.postDeletePokemon = async (req, res, next) => {
   try {
     const id = req.body.id;
 
-    const pokemon = await Pokemon.findByPk(id);
+    const pokemon = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
 
     if (pokemon) {
       const img = pokemon.dataValues.photo_path;
+
       fs.unlinkSync(`./public/assets/images/uploaded/${img}`);
+
       await pokemon.destroy();
+
+      req.flash("msg", "Pokemon eliminado con exito");
     }
 
     res.redirect("/admin-pokemon");
