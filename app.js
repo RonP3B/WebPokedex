@@ -3,11 +3,11 @@
 require("dotenv").config();
 const express = require("express");
 const { engine } = require("express-handlebars");
-const session = require("express-session")
+const session = require("express-session");
 const multer = require("multer");
 const flash = require("connect-flash");
 const path = require("path");
-
+const SessionStore = require('express-session-sequelize')(session.Store);
 const { Pokemon, PokemonType, Region, User } = require("./exports/models")
 const { auth, home, pokemon, regions, types, notFound } = require("./exports/routes");
 const { sequelize, imgStorage } = require("./exports/utils");
@@ -32,7 +32,12 @@ app.set("views", "views");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(multer({ storage: imgStorage }).single("image"));
-app.use(session({ secret: "mysecret", resave: true, saveUninitialized: false }));
+app.use(session({
+  secret: "mysecret",
+  resave: true,
+  saveUninitialized: false,
+  store: new SessionStore({ db: sequelize })
+}));
 app.use(flash());
 app.use(addReqUser);
 app.use(locals);
