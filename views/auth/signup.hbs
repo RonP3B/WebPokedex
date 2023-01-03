@@ -16,6 +16,7 @@
     </div>
     <div class="main__card__body card-body">
       <form method="POST" action="/sign-up" class="main__card__body__form">
+        <input name="_csrf" value="{{csrfToken}}" type="hidden" />
         <div class="form-group mb-2">
           <label for="username">nombre de usuario:</label>
           <input

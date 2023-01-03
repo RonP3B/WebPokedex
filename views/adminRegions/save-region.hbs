@@ -32,6 +32,7 @@
         action="/admin-regions/{{#if edit}}edit{{else}}add{{/if}}"
         class="main__card__body__form"
       >
+        <input name="_csrf" value="{{csrfToken}}" type="hidden" />
         <div class="form-group mb-2">
           <label for="name">nombre de la región:</label>
           <input

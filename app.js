@@ -6,6 +6,8 @@ const { engine } = require("express-handlebars");
 const session = require("express-session");
 const multer = require("multer");
 const flash = require("connect-flash");
+const csrf = require("csurf");
+const csrfProtection = csrf();
 const path = require("path");
 const SessionStore = require("express-session-sequelize")(session.Store);
 const { Pokemon, PokemonType, Region, User } = require("./exports/models")
@@ -39,6 +41,7 @@ app.use(session({
   store: new SessionStore({ db: sequelize })
 }));
 app.use(flash());
+app.use(csrfProtection);
 app.use(addReqUser);
 app.use(locals);
 app.use(auth);

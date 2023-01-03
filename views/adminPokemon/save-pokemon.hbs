@@ -54,6 +54,7 @@
           class="main__card__body__form"
           enctype="multipart/form-data"
         >
+          <input name="_csrf" value="{{csrfToken}}" type="hidden" />
           <div class="form-group mb-2 input-img">
             {{#if edit}}
               <picture>
