@@ -7,7 +7,7 @@ const addReqUser = async (req, res, next) => {
       const username = req.session.user;
 
       const userObj = username
-        ? await User.findOne({ where: { username } })
+        ? await User.findOne({ where: { username: username.toLowerCase() } })
         : null;
 
       req.user = userObj ? userObj.dataValues : null;
