@@ -19,6 +19,7 @@
         action="/admin-{{page}}/delete"
         class="main__card__body__form"
       >
+        <input name="_csrf" value="{{csrfToken}}" type="hidden" />
         <p>¿Está seguro que desea
           <strong>eliminar</strong>
           {{modelMsg}}?</p>
