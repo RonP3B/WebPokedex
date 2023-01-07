@@ -13,7 +13,7 @@ const SessionStore = require("express-session-sequelize")(session.Store);
 const { Pokemon, PokemonType, Region, User } = require("./exports/models")
 const { auth, home, pokemon, regions, types, notFound } = require("./exports/routes");
 const { sequelize, imgStorage } = require("./exports/utils");
-const { locals, addReqUser, isUnauthorized } = require("./exports/middlewares");
+const { locals, isUnauthorized } = require("./exports/middlewares");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -42,7 +42,6 @@ app.use(session({
 }));
 app.use(flash());
 app.use(csrfProtection);
-app.use(addReqUser);
 app.use(locals);
 app.use(auth);
 app.use("/pokemon", isUnauthorized, home);
