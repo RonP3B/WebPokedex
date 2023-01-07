@@ -4,7 +4,7 @@ const Region = require("../models/Region");
 
 exports.getRegions = async (req, res, next) => {
   try {
-    const regionObj = await Region.findAll({ where: { user_id: req.user.id } });
+    const regionObj = await Region.findAll({ where: { user_id: req.session.user.id } });
     const regions = regionObj.map((res) => res.dataValues);
 
     res.render("adminRegions/admin-region", {
@@ -25,7 +25,7 @@ exports.getAddRegion = (req, res, next) => {
 exports.getEditRegion = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const regionObj = await Region.findOne({ where: { id_region: id, user_id: req.user.id } });
+    const regionObj = await Region.findOne({ where: { id_region: id, user_id: req.session.user.id } });
 
     if (!regionObj) return res.redirect("/admin-regions");
 
@@ -41,7 +41,7 @@ exports.getEditRegion = async (req, res, next) => {
 exports.getDeleteRegion = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const regionObj = await Region.findOne({ where: { id_region: id, user_id: req.user.id } });
+    const regionObj = await Region.findOne({ where: { id_region: id, user_id: req.session.user.id } });
 
     if (!regionObj) return res.redirect("/admin-regions");
 
@@ -67,7 +67,7 @@ exports.postAddRegion = async (req, res, next) => {
     if (name) {
       await Region.create({
         id_region: crypto.randomUUID(),
-        user_id: req.user.id,
+        user_id: req.session.user.id,
         name
       });
 
@@ -88,7 +88,7 @@ exports.postEditRegion = async (req, res, next) => {
     if (id && name) {
       await Region.update(
         { name },
-        { where: { id_region: id, user_id: req.user.id } }
+        { where: { id_region: id, user_id: req.session.user.id } }
       );
 
       req.flash("msg", "Region editada con exito");
@@ -104,7 +104,7 @@ exports.postEditRegion = async (req, res, next) => {
 exports.postDeleteRegion = async (req, res, next) => {
   try {
     const id = req.body.id;
-    const region = await Region.findOne({ where: { id_region: id, user_id: req.user.id } });
+    const region = await Region.findOne({ where: { id_region: id, user_id: req.session.user.id } });
 
     if (region) {
       await region.destroy();

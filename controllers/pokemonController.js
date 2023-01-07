@@ -6,7 +6,7 @@ const fs = require("fs")
 exports.getPokemon = async (req, res, next) => {
   try {
     const pokemonObj = await Pokemon.findAll({
-      where: { user_id: req.user.id },
+      where: { user_id: req.session.user.id },
       include: [
         {
           model: Region,
@@ -32,8 +32,8 @@ exports.getPokemon = async (req, res, next) => {
 
 exports.getAddPokemon = async (req, res, next) => {
   try {
-    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
-    const typesObj = await PokemonType.findAll({ where: { user_id: req.user.id } });
+    const regionsObj = await Region.findAll({ where: { user_id: req.session.user.id } });
+    const typesObj = await PokemonType.findAll({ where: { user_id: req.session.user.id } });
 
     const regions = regionsObj.map((res) => res.dataValues);
     const types = typesObj.map((res) => res.dataValues);
@@ -54,9 +54,9 @@ exports.getEditpokemon = async (req, res, next) => {
   try {
     const id = req.params.id;
 
-    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
-    const typesObj = await PokemonType.findAll({ where: { user_id: req.user.id } });
-    const pokemonObj = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
+    const regionsObj = await Region.findAll({ where: { user_id: req.session.user.id } });
+    const typesObj = await PokemonType.findAll({ where: { user_id: req.session.user.id } });
+    const pokemonObj = await Pokemon.findOne({ where: { id, user_id: req.session.user.id } });
 
     const regions = regionsObj.map((res) => res.dataValues);
     const types = typesObj.map((res) => res.dataValues);
@@ -83,7 +83,7 @@ exports.getEditpokemon = async (req, res, next) => {
 exports.getDeletePokemon = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const pokemonObj = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
+    const pokemonObj = await Pokemon.findOne({ where: { id, user_id: req.session.user.id } });
 
     if (!pokemonObj) return res.redirect("/admin-pokemon");
 
@@ -113,7 +113,7 @@ exports.postAddPokemon = async (req, res, next) => {
         pokemonTypeIdType: type,
         name,
         photo_path: imgFile.filename,
-        user_id: req.user.id
+        user_id: req.session.user.id
       });
 
       req.flash("msg", "Pokemon creado con exito");
@@ -135,7 +135,7 @@ exports.postEditPokemon = async (req, res, next) => {
       return res.redirect("/admin-pokemon");
     }
 
-    const pokemon = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
+    const pokemon = await Pokemon.findOne({ where: { id, user_id: req.session.user.id } });
     const photoPath = pokemon.dataValues.photo_path
 
     if (imgFile && imgFile.filename !== photoPath) {
@@ -165,7 +165,7 @@ exports.postDeletePokemon = async (req, res, next) => {
   try {
     const id = req.body.id;
 
-    const pokemon = await Pokemon.findOne({ where: { id, user_id: req.user.id } });
+    const pokemon = await Pokemon.findOne({ where: { id, user_id: req.session.user.id } });
 
     if (pokemon) {
       const img = pokemon.dataValues.photo_path;

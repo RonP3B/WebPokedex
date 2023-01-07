@@ -3,9 +3,9 @@ const { Pokemon, Region, PokemonType } = require("../exports/models");
 
 exports.getHome = async (req, res, next) => {
   try {
-    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
+    const regionsObj = await Region.findAll({ where: { user_id: req.session.user.id } });
     const pokemonObj = await Pokemon.findAll({
-      where: { user_id: req.user.id },
+      where: { user_id: req.session.user.id },
       include: [
         {
           model: Region,
@@ -38,9 +38,9 @@ exports.postHome = async (req, res, next) => {
     const post = req.query.post;
     const data = req.body.value;
     const msg = post === "name" ? "con ese nombre" : "de esa región";
-    const regionsObj = await Region.findAll({ where: { user_id: req.user.id } });
+    const regionsObj = await Region.findAll({ where: { user_id: req.session.user.id } });
     const pokemonObj = await Pokemon.findAll({
-      where: { [post]: data, user_id: req.user.id },
+      where: { [post]: data, user_id: req.session.user.id },
       include: [
         {
           model: Region,
