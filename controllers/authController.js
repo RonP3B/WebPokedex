@@ -133,7 +133,7 @@ exports.postLogin = async (req, res, next) => {
     }
 
     req.session.isAuthenticated = true;
-    req.session.user = username;
+    req.session.user = user;
 
     req.session.save((err) => {
       if (err) console.log(`session save error: ${err}`);
