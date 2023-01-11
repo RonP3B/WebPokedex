@@ -128,7 +128,6 @@ exports.postLogin = async (req, res, next) => {
 
     if (!isValidPass) {
       req.flash("msg", "Contraseña incorrecta");
-      console.log("INCORREWCT PASS")
       return res.redirect("/");
     }
 
@@ -170,7 +169,9 @@ exports.postSignup = async (req, res, next) => {
       return res.redirect("/sign-up");
     }
 
-    const objUser = await User.findOne({ where: { username } });
+    const objUser = await User.findOne({
+      where: { username: username.toLowerCase() }
+    });
 
     if (objUser) {
       req.flash("msg", "El nombre de usuario dado ya existe");
